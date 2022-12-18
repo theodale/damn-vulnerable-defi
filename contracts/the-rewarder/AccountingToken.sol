@@ -11,8 +11,9 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
  * @notice A limited pseudo-ERC20 token to keep track of deposits and withdrawals
  *         with snapshotting capabilities
  */
-contract AccountingToken is ERC20Snapshot, AccessControl {
 
+// ERC20 that records balances/total supply at snapshots
+contract AccountingToken is ERC20Snapshot, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant SNAPSHOT_ROLE = keccak256("SNAPSHOT_ROLE");
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
@@ -36,6 +37,7 @@ contract AccountingToken is ERC20Snapshot, AccessControl {
 
     function snapshot() external returns (uint256) {
         require(hasRole(SNAPSHOT_ROLE, msg.sender), "Forbidden");
+        // returns ID of snapshot
         return _snapshot();
     }
 
